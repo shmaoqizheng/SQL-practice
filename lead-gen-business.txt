@@ -1,5 +1,17 @@
-select MONTHNAME(billing.charged_datetime) as Month, SUM(billing.amount) as Total
-from billing
-left join clients
-on clients.client_id = billing.client_id
+SELECT MONTHNAME(billing.charged_datetime) as Month, SUM(billing.amount) as Total
+FROM clients
+LEFT JOIN billing
+ON clients.client_id = billing.client_id
 WHERE DATE_FORMAT(billing.charged_datetime, "%M") = "March"
+
+SELECT clients.first_name, clients.last_name, SUM(billing.amount) as Total
+FROM clients
+LEFT JOIN billing
+ON clients.client_id = billing.client_id
+WHERE clients.client_id = 2
+
+SELECT clients.first_name, clients.last_name, sites.site_id, sites.domain_name
+FROM clients
+LEFT JOIN sites
+ON clients.client_id = sites.client_id
+WHERE clients.client_id = 10
