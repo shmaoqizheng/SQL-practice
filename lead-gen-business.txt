@@ -1,0 +1,5 @@
+select MONTHNAME(billing.charged_datetime) as Month, SUM(billing.amount) as Total
+from billing
+left join clients
+on clients.client_id = billing.client_id
+WHERE DATE_FORMAT(billing.charged_datetime, "%M") = "March"
